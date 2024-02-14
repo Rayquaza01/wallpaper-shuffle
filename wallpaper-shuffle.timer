@@ -1,0 +1,9 @@
+[Unit]
+Description=Shuffles your wallpaper on a timer
+
+[Timer]
+OnUnitActiveSec=1h
+Unit=wallpaper-shuffle.service
+
+[Install]
+WantedBy=timers.target

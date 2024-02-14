@@ -1,0 +1,6 @@
+[Unit]
+Description=Shuffles the current wallpaper
+
+[Service]
+Type=oneshot
+ExecStart=%h/.local/bin/wallpaper-shuffle
