@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/usr/bin/env bash
 # The path to use for wallpapers in light mode
 WALLPAPER_PATH=$HOME/Pictures/Wallpapers/Shuffle
 # The path to use for wallpapers in dark mode
@@ -7,12 +7,12 @@ WALLPAPER_PATH_DARK=$HOME/Pictures/Wallpapers/Shuffle
 WALLPAPER=$(find "$WALLPAPER_PATH" -type f -name "*.jpg" -o -name "*.png" | shuf -n 1)
 WALLPAPER_DARK=$(find "$WALLPAPER_PATH_DARK" -type f -name "*.jpg" -o -name "*.png" | shuf -n 1)
 
-if [ "$(command -v gsettings)" != "" ]; then
+if command -v gsettings &>/dev/null; then
     gsettings set org.gnome.desktop.background picture-uri "file://$WALLPAPER"
     gsettings set org.gnome.desktop.background picture-uri-dark "file://$WALLPAPER_DARK"
 fi
 
-if [ "$(command -v plasma-apply-wallpaperimage)" != "" ]; then
+if command -v plasma-apply-wallpaperimage &>/dev/null; then
     # is there a way to do dark mode wallpapers in kde
     plasma-apply-wallpaperimage "$WALLPAPER"
 fi
