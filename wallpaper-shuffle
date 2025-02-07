@@ -1,8 +1,19 @@
 #!/usr/bin/env bash
+
+PICTURES="$HOME/Pictures"
+if command -v xdg-user-dir &>/dev/null; then
+    PICTURES=$(xdg-user-dir PICTURES)
+fi
+
 # The path to use for wallpapers in light mode
-WALLPAPER_PATH=$HOME/Pictures/Wallpapers/Shuffle
+if [ -z "$WALLPAPER_PATH" ]; then
+    WALLPAPER_PATH=$PICTURES/Wallpapers/Shuffle
+fi
+
 # The path to use for wallpapers in dark mode
-WALLPAPER_PATH_DARK=$HOME/Pictures/Wallpapers/Shuffle
+if [ -z "$WALLPAPER_PATH_DARK" ]; then
+    WALLPAPER_PATH_DARK=$PICTURES/Wallpapers/Shuffle
+fi
 
 WALLPAPER=$(find "$WALLPAPER_PATH" -type f -name "*.jpg" -o -name "*.png" | shuf -n 1)
 WALLPAPER_DARK=$(find "$WALLPAPER_PATH_DARK" -type f -name "*.jpg" -o -name "*.png" | shuf -n 1)
