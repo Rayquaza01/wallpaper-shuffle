@@ -2,7 +2,8 @@
 Description=Shuffles your wallpaper on a timer
 
 [Timer]
-OnUnitActiveSec=1h
+OnStartupSec=1m
+OnCalendar=hourly
 Unit=wallpaper-shuffle.service
 
 [Install]
