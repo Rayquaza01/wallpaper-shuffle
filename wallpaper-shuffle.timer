@@ -4,6 +4,7 @@ Description=Shuffles your wallpaper on a timer
 [Timer]
 OnStartupSec=1m
 OnCalendar=hourly
+Persistent=true
 Unit=wallpaper-shuffle.service
 
 [Install]
