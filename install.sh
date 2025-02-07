@@ -1,25 +1,22 @@
 #!/bin/bash
+BIN_DIR="$HOME/.local/bin"
+SYSTEMD_DIR="${XDG_CONFIG_HOME:-$HOME/.config}/systemd/user"
 
-mkdir -p ~/.local/bin
+mkdir -p "$BIN_DIR"
+mkdir -p "$SYSTEMD_DIR"
 
-cp wallpaper-shuffle ~/.local/bin/wallpaper-shuffle
-echo "Copied script to ~/.local/bin/wallpaper-shuffle"
+cp -v wallpaper-shuffle "$BIN_DIR"
 
-mkdir -p ~/.config/systemd/user
+cp -v wallpaper-shuffle.service "$SYSTEMD_DIR"
+cp -v wallpaper-shuffle.timer "$SYSTEMD_DIR"
 
-cp wallpaper-shuffle.service ~/.config/systemd/user/wallpaper-shuffle.service
-echo "Copied systemd service to ~/.config/systemd/user/wallpaper-shuffle.service"
+systemctl --user daemon-reload
 
-cp wallpaper-shuffle.timer ~/.config/systemd/user/wallpaper-shuffle.timer
-echo "Copied systemd timer to ~/.config/systemd/user/wallpaper-shuffle.timer"
-
-echo
-
-echo "To enable service, run the following commands:"
-echo "$ systemctl --user enable wallpaper-shuffle.timer"
-echo "$ systemctl --user start wallpaper-shuffle.timer"
+echo "Enable the service with:"
+echo "$ systemctl --user enable --now wallpaper-shuffle.timer"
 
 echo
 
-echo "If the service was previously enabled, you will need to reload the systemd daemon"
-echo "$ systemctl --user daemon-reload"
+echo "Disable the service with:"
+echo "$ systemctl --user disable wallpaper-shuffle.timer"
+echo "$ systemctl --user stop wallpaper-shuffle.timer"
