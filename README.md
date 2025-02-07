@@ -15,9 +15,11 @@ Shuffles wallpapers
 
 `WALLPAPER_PATH_DARK` contains path to a folder containing the wallpapers you want to shuffle in dark mode. Default is same as `WALLPAPER_PATH`.
 
+You can customize the path by setting the environment variables.
+
 ### `wallpaper-shuffle.timer`
 
-`OnUnitActiveSec` is the interval between triggering. Defaults to `1h` (1 hour).
+`OnCalendar` is the interval between triggering. Defaults to hourly.
 
 ### `wallpaper-shuffle.service`
 
@@ -38,8 +40,7 @@ Running `wallpaper-shuffle` will change the current wallpaper to one randomly ch
 To enable automatic shuffling, you need to activate the systemd timer:
 
 ```sh
-systemctl --user enable wallpaper-shuffle.timer
-systemctl --user start wallpaper-shuffle.timer
+systemctl --user enable --now wallpaper-shuffle.timer
 ```
 
 To disable automatic shuffling, you can simply stop and/or disable the systemd timer:
@@ -49,11 +50,10 @@ systemctl --user stop wallpaper-shuffle.timer
 systemctl --user disable wallpaper-shuffle.timer
 ```
 
-To change the interval between shuffles, you can update the `OnUnitActiveSec` option in the systemd timer. You will need to reload the daemon for your change to take effect:
+To change the interval between shuffles, you can update the `OnCalendar` option in the systemd timer. You will need to reload the daemon for your change to take effect:
 
 ```sh
 systemctl --user daemon-reload
 ```
 
 Of course, you can also use cron (or any other method of running the script) if you would prefer not to use a systemd timer.
-
